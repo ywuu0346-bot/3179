@@ -38,7 +38,7 @@
         "size": {
           "field": "Rainfall (mm)",
           "type": "quantitative",
-          "title": "Rainfall (mm, 36 mo)",
+          "title": "Rainfall (mm)",
           "scale": {"range": [5, 400]}
         },
         "color": {
