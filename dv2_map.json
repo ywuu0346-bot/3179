@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 500,
+  "title": "Australia Rainfall (past 36 months)",
+  "projection": {"type": "mercator", "center": [134, -25], "scale": 850  },
+  "layer": [
+     {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ywuu0346-bot/3179/refs/heads/main/STE_2021_AUST_GDA2020.json",
+        "format": {"type": "topojson", "feature": "states and boundries"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ywuu0346-bot/3179/refs/heads/main/rainfall.2025-08-31.36month.aus.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Latitude (°)": "number",
+            "Longitude (°)": "number",
+            "Rainfall (mm)": "number",
+            "Percentile": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 0.5,
+        "tooltip": {"content": "data"}
+      },
+      "encoding": {
+        "longitude": {"field": "Longitude (°)", "type": "quantitative"},
+        "latitude": {"field": "Latitude (°)", "type": "quantitative"},
+        "size": {
+          "field": "Rainfall (mm)",
+          "type": "quantitative",
+          "title": "Rainfall (mm, 36 mo)",
+          "scale": {"range": [5, 400]}
+        },
+        "color": {
+          "field": "Percentile",
+          "type": "quantitative",
+          "title": "Percentile (vs. history)",
+          "scale": {"scheme": "blues"}
+        }
+      }
+    }
+  ]
+}
