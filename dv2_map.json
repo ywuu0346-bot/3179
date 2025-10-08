@@ -3,9 +3,9 @@
   "width": 800,
   "height": 500,
   "title": "Australia Rainfall (past 36 months)",
-  "projection": {"type": "mercator", "center": [134, -25], "scale": 850  },
+  "projection": {"type": "mercator", "center": [134, -25], "scale": 850},
   "layer": [
-     {
+    {
       "data": {
         "url": "https://raw.githubusercontent.com/ywuu0346-bot/3179/refs/heads/main/STE_2021_AUST_GDA2020.json",
         "format": {"type": "topojson", "feature": "states and boundries"}
@@ -25,29 +25,32 @@
           }
         }
       },
-      "mark": {
-        "type": "circle",
-        "opacity": 0.8,
-        "stroke": "white",
-        "strokeWidth": 0.5,
-        "tooltip": {"content": "data"}
-      },
+      "mark": {"type": "circle", "opacity": 0.75, "stroke": "white", "strokeWidth": 0.5},
       "encoding": {
         "longitude": {"field": "Longitude (°)", "type": "quantitative"},
         "latitude": {"field": "Latitude (°)", "type": "quantitative"},
         "size": {
           "field": "Rainfall (mm)",
           "type": "quantitative",
-          "title": "Rainfall (mm)",
-          "scale": {"range": [5, 400]}
+          "title": "Total rainfall (mm, 36 months)",
+          "scale": {"type": "sqrt", "range": [6, 420]},
+          "legend": {"format": ",.0f"}
         },
         "color": {
           "field": "Percentile",
           "type": "quantitative",
-          "title": "Percentile (vs. history)",
-          "scale": {"scheme": "blues"}
+          "title": "Percentile vs history",
+          "scale": {"scheme": "blues", "domain": [0, 100]},
+          "legend": {"format": ".0f"}
+        },
+        "tooltip": [
+          {"field": "Region", "title": "State"},
+          {"field": "Rainfall (mm)", "title": "Total rainfall (mm)", "format": ",.0f"},
+          {"field": "Percentile", "title": "Percentile", "format": ".0f"},
+          {"field": "Latitude (°)", "title": "Latitude (°)", "format": ".2f"},
+          {"field": "Longitude (°)", "title": "Longitude (°)", "format": ".2f"}
+        ]
         }
       }
-    }
   ]
 }
